@@ -3,6 +3,8 @@ const express = require("express")
 const config = require("config")
 const bodyParser = require("body-parser")
 
+mongoose.connect("mongodb://localhost:27017/wasp")
+
 //getting routers 
 
 const userRouter = require("./routes/users")

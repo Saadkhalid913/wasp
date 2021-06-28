@@ -7,7 +7,8 @@ mongoose.connect("mongodb://localhost:27017/wasp")
 
 //getting routers 
 
-const userRouter = require("./routes/users")
+const  userRouter  = require("./routes/users")
+const  postRouter  = require("./routes/posts")
 
 
 
@@ -20,6 +21,7 @@ app.use(bodyParser({extended:true}))
 
 
 app.use("/api", userRouter);
+app.use("/api", postRouter);
 
 
 

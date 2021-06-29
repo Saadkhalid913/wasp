@@ -2,8 +2,11 @@ const mongoose = require("mongoose")
 const express = require("express")
 const config = require("config")
 const bodyParser = require("body-parser")
+const cors = require("cors")
 
-mongoose.connect("mongodb://localhost:27017/wasp")
+const URI = "mongodb://localhost:27017/wasp"
+
+mongoose.connect(URI, {useUnifiedTopology: true})
 
 //getting routers 
 
@@ -18,6 +21,7 @@ const app = express()
 
 app.use(express.json())
 app.use(bodyParser({extended:true}))
+app.use(cors({origin: "*"}))
 
 
 app.use("/api", userRouter);

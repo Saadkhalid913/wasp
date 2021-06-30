@@ -4,7 +4,11 @@ const config = require("config")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 
-const URI = "mongodb://localhost:27017/wasp"
+if (!config.get("key")) throw new Error("Set 'wasp_key' config variable")
+if (!config.get("URI")) throw new Error("Set 'URI' config variable")
+
+
+const URI = config.get("URI")
 
 mongoose.connect(URI, {useUnifiedTopology: true})
 
@@ -15,7 +19,6 @@ const  postRouter  = require("./routes/posts")
 
 
 
-if (!config.get("key")) throw new Error("Set 'wasp_key' config variable")
 
 const app = express()
 

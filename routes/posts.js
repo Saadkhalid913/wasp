@@ -39,4 +39,14 @@ router.put("/posts/toggle/:id", auth, async (req,res) => {
 })
 
 
+router.delete("/posts/:id", auth, async (req,res) => {
+  const response = await postModel.findByIdAndDelete(req.params.id);
+  const user = await userModel.findById(req._user._id);
+  const index = user.posts.findIndex(p => p._id === response._id);
+  user.posts.splice(index, 1);
+  await user.save()
+  res.send(response)
+})
+
+
 module.exports = router

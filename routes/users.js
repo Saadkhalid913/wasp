@@ -35,6 +35,7 @@ router.post("/users/signup" , ValidateSignup,  async (req,res,next) => {
 
 
 router.post("/users/login", async (req,res) => {
+  console.log(req.body)
   const { username, password } = req.body
   if (!username.match(emailValidationPattern)) {
     user = await userModel.findOne({username : username})
@@ -58,7 +59,7 @@ router.post("/users/validate", auth, (req,res) => {
 function ValidateRequest(req,res,next,fields) {
   for (let field of fields)
     if (!req.body[field]) {
-      res.send(`Please provide field "${field}"`)
+      res.send({error: `Please provide field "${field}"`})
       return false 
     }
   return true 
